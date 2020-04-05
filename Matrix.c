@@ -1,23 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "Matrix.h"
 
-/** Use single instead of double pointer to store matrix to reduce memory accesses (optimization because reduces the 
-number of memory accesses).
-**/
-
-struct Matrix{
-	int m, n;
-	int* matrix_pointer;
-};
 
 void check_range(struct Matrix matrix, int element_row, int element_column){
 	if(element_row > matrix.m || element_column > matrix.n) perror("Out of range");
-}
-
-struct Matrix init_matrix(size_t m, size_t n){
-	int* matrix_pointer = calloc(m, n);
-	struct Matrix matrix = {.m = m, .n = n, .matrix_pointer = matrix_pointer};
-	return matrix;
 }
 
 void set_element(struct Matrix matrix, int element_row, int element_column, int value){
@@ -80,11 +67,23 @@ void print_matrix(struct Matrix matrix){
 	printf("\n");
 }
 
-int main(int argc, char *argv[]) {
-	struct Matrix test_matrix = init_matrix(3, 3);
-	int row[3] = {3,4,5};
-	set_row(test_matrix, 2, row);
-	print_matrix(test_matrix);
-	set_column(test_matrix, 2, row);
-	print_matrix(test_matrix);	
+struct Matrix init_empty_matrix(size_t m, size_t n){
+	int* matrix_pointer = calloc(m, n);
+	struct Matrix matrix = {.m = m, .n = n, .matrix_pointer = matrix_pointer};
+	return matrix;
 }
+
+struct Matrix init_matrix(size_t m, size_t n, int* elements){
+	int* matrix_pointer = calloc(m, n);
+	struct Matrix matrix = {.m = m, .n = n, .matrix_pointer = matrix_pointer};
+	for(int i = 0; i < m; i++){
+		set_row(matrix, i, elements + i*n);
+	}
+	return matrix;
+}
+
+//int main(int argc, char *argv[]) {
+//	int double_array[][3] = {1,2,3,4,5,6,7,8,9};
+//	struct Matrix test_matrix = init_matrix(3, 3, (int*)double_array);
+//	print_matrix(test_matrix);
+//}
