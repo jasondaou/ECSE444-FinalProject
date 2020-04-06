@@ -1,16 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Matrix.h"
+#include <string.h>
 
 
 void check_range(struct Matrix matrix, int element_row, int element_column){
 	if(element_row > matrix.m || element_column > matrix.n) perror("Out of range");
 }
 
-void set_element(struct Matrix matrix, int element_row, int element_column, int value){
-	check_range(matrix, element_row, element_column);
-	int* matrix_pointer = matrix.matrix_pointer;
-	int* element_pointer = matrix_pointer + element_row * matrix.n + element_column;
+void set_element(struct Matrix* matrix, int element_row, int element_column, int value){
+	check_range(*matrix, element_row, element_column);
+	int* matrix_pointer = matrix->matrix_pointer;
+	int* element_pointer = matrix_pointer + element_row * matrix->n + element_column;
 	*element_pointer = value;
 	return;
 }
@@ -27,23 +28,24 @@ int* get_row(struct Matrix matrix, size_t row_index){
 	return row_address;
 }
 
-void set_row(struct Matrix matrix, int row_index, int* row_values){
-	for(int i = 0; i < matrix.n; i++){
-		set_element(matrix, row_index, i, *(row_values+i));
+void set_row(struct Matrix* matrix, int row_index, int* row_values){
+	for(int i = 0; i < matrix->n; i++){
+		set_element(matrix, row_index, i, *(row_values+i*sizeof(int)));
 	}
 	return;
 }
 
 int* get_column(struct Matrix matrix, size_t column_index){
-	int* column = malloc(matrix.m);
+	int* column = malloc(matrix.m*sizeof(int));
+	memset(column, 0, matrix.m*sizeof(int));
 	for(int i = 0; i < matrix.m; i++){
 		column[i] = get_element(matrix, i, column_index);
 	}
 	return column;
 	}
 
-void set_column(struct Matrix matrix, int column_index, int* column_values){
-	for(int i = 0; i < matrix.m; i++){
+void set_column(struct Matrix* matrix, int column_index, int* column_values){
+	for(int i = 0; i < matrix->m; i++){
 			set_element(matrix, i, column_index, column_values[i]);
 		}
 }
@@ -68,22 +70,23 @@ void print_matrix(struct Matrix matrix){
 }
 
 struct Matrix init_empty_matrix(size_t m, size_t n){
-	int* matrix_pointer = calloc(m, n);
+	int* matrix_pointer = malloc(m * n * sizeof(int));
+	memset(matrix_pointer, 0, m*n*sizeof(int));
 	struct Matrix matrix = {.m = m, .n = n, .matrix_pointer = matrix_pointer};
 	return matrix;
 }
 
 struct Matrix init_matrix(size_t m, size_t n, int* elements){
-	int* matrix_pointer = calloc(m, n);
-	struct Matrix matrix = {.m = m, .n = n, .matrix_pointer = matrix_pointer};
-	for(int i = 0; i < m; i++){
-		set_row(matrix, i, elements + i*n);
-	}
+	struct Matrix matrix = {.m = m, .n = n, .matrix_pointer = malloc(m*n*sizeof(int))};
+	matrix.matrix_pointer = elements;
 	return matrix;
 }
 
 //int main(int argc, char *argv[]) {
-//	int double_array[][3] = {1,2,3,4,5,6,7,8,9};
+//	int double_array[9] = {1,2,3,4,5,6,7,8,9};
 //	struct Matrix test_matrix = init_matrix(3, 3, (int*)double_array);
+//	print_matrix(test_matrix);
+//
+//	set_element(&test_matrix, 1, 1, 20);
 //	print_matrix(test_matrix);
 //}
