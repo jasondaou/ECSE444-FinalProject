@@ -1,16 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Matrix.h"
+#include "SparseMatrix.h"
 #include <string.h>
 
 
-struct SparseMatrix{
-	int m, n;
-	int size;
-	int capacity;
-	struct Matrix elements;
-};
-
+void check_sparse_matrix_range(struct SparseMatrix sparseMatrix, int element_row, int element_column){
+	if(element_row > sparseMatrix.m || element_column > sparseMatrix.n) perror("Out of range");
+}
 
 struct SparseMatrix init_empty_sparse_matrix(size_t m, size_t n, int capacity){
 	struct Matrix sparseMatrixElements = init_empty_matrix(3, capacity);
@@ -37,7 +34,7 @@ void print_sparse_matrix(const struct SparseMatrix sparseMatrix){
 }
 
 void set_sparse_matrix_element(struct SparseMatrix* sparseMatrix, int element_row, int element_column, int value){
-	check_range(sparseMatrix->elements, element_row, element_column);
+	check_sparse_matrix_range(*sparseMatrix, element_row, element_column);
 	// If the element is non-zero, modify it
 	for(int i = 0; i < sparseMatrix->size; i++){
 		if (get_element(sparseMatrix->elements, 0, i) == element_row){
@@ -81,13 +78,18 @@ void set_sparse_matrix_element(struct SparseMatrix* sparseMatrix, int element_ro
 	}
 	return;
 }
-//
-//int get_element(struct SparseMatrix matrix, int element_row, int element_column){
-//	check_range(sparseMatrix, element_row, element_column);
-//	int* matrix_pointer = matrix.matrix_pointer;
-//	int* element_pointer = matrix_pointer + element_row * matrix.n + element_column;
-//	return *element_pointer;
-//}
+
+int get_sparse_matrix_element(struct SparseMatrix sparseMatrix, int element_row, int element_column){
+	check_sparse_matrix_range(sparseMatrix, element_row, element_column);
+	for(int i = 0; i < sparseMatrix.size; i++){
+		if(get_element(sparseMatrix.elements, 0, i) == element_row){
+			if(get_element(sparseMatrix.elements, 1, i) == element_column){
+				return get_element(sparseMatrix.elements, 2, i);
+			}
+		}
+	}
+	return 0;
+}
 
 
 
@@ -113,6 +115,8 @@ int main(int argc, char *argv[]) {
 	
 	set_sparse_matrix_element(&test, 2, 2, 5);
 	print_sparse_matrix(test);
+	
+	printf("%d", get_sparse_matrix_element(test, 2, 1));
 
 	return 0;
 	
