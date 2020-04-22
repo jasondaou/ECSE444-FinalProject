@@ -82,11 +82,11 @@ struct Matrix init_matrix(size_t m, size_t n, int* elements){
 	return matrix;
 }
 
-//int main(int argc, char *argv[]) {
-//	int double_array[9] = {1,2,3,4,5,6,7,8,9};
-//	struct Matrix test_matrix = init_matrix(3, 3, (int*)double_array);
-//	print_matrix(test_matrix);
-//
-//	set_element(&test_matrix, 1, 1, 20);
-//	print_matrix(test_matrix);
-//}
+// int main(int argc, char *argv[]) {
+// 	int double_array[9] = {1,2,3,4,5,6,7,8,9};
+// 	struct Matrix test_matrix = init_matrix(3, 3, (int*)double_array);
+// 	print_matrix(test_matrix);
+
+// 	set_element(&test_matrix, 1, 1, 20);
+// 	print_matrix(test_matrix);
+// }
