@@ -22,5 +22,8 @@ void print_array(int* array_ptr, int size);
 void print_matrix(struct Matrix matrix);
 struct Matrix init_empty_matrix(size_t m, size_t n);
 struct Matrix init_matrix(size_t m, size_t n, int* elements);
+struct Matrix add_matrices(struct Matrix matrix1, struct Matrix matrix2);
+struct Matrix sub_matrices(struct Matrix matrix1, struct Matrix matrix2);
+void check_same_size(struct Matrix matrix1, struct Matrix matrix2);
 
 #endif

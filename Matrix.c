@@ -82,11 +82,48 @@ struct Matrix init_matrix(size_t m, size_t n, int* elements){
 	return matrix;
 }
 
+void check_same_size(struct Matrix matrix1, struct Matrix matrix2){
+	if(matrix1.m != matrix2.m || matrix1.n != matrix2.n) perror("Matrices should have the same size to add");
+}
+
+struct Matrix add_matrices(struct Matrix matrix1, struct Matrix matrix2){
+	check_same_size(matrix1, matrix2);
+	struct Matrix result_matrix = init_empty_matrix(matrix1.m, matrix1.n);
+	int result = 0, element1 = 0, element2 = 0;
+	for(int i = 0; i < matrix1.m; i++){
+		for(int j = 0; j < matrix2.n; j++){
+			int element1 = get_element(matrix1, i, j);
+			int element2 = get_element(matrix2, i, j);
+			result = element1 + element2;
+			set_element(&result_matrix, i, j, result);
+		}
+	}
+	return result_matrix;
+}
+
+struct Matrix sub_matrices(struct Matrix matrix1, struct Matrix matrix2){
+	check_same_size(matrix1, matrix2);
+	struct Matrix result_matrix = init_empty_matrix(matrix1.m, matrix1.n);
+	int result = 0, element1 = 0, element2 = 0;
+	for(int i = 0; i < matrix1.m; i++){
+		for(int j = 0; j < matrix2.m; j++){
+			int element1 = get_element(matrix1, i, j);
+			int element2 = get_element(matrix2, i, j);
+			result = element1 - element2;
+			set_element(&result_matrix, i, j, result);
+		}
+	}
+	return result_matrix;
+}
+
+
 // int main(int argc, char *argv[]) {
 // 	int double_array[9] = {1,2,3,4,5,6,7,8,9};
-// 	struct Matrix test_matrix = init_matrix(3, 3, (int*)double_array);
-// 	print_matrix(test_matrix);
-
-// 	set_element(&test_matrix, 1, 1, 20);
-// 	print_matrix(test_matrix);
+// 	struct Matrix matrix1 = init_matrix(3, 3, (int*)double_array);
+//	int double_array_2[9] = {9,8,7,6,5,4,3,2,1};
+// 	struct Matrix matrix2 = init_matrix(3, 3, (int*)double_array_2);
+// 	print_matrix(matrix1);
+//	print_matrix(matrix2);
+//	print_matrix(add_matrices(matrix1, matrix2));
+//
 // }

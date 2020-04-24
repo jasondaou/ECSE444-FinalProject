@@ -14,9 +14,13 @@ struct SparseMatrix{
 };
 
 void check_sparse_matrix_range(struct SparseMatrix sparseMatrix, int element_row, int element_column);
+void check_sparse_matrix_same_size(struct SparseMatrix sparseMatrix1, struct SparseMatrix sparseMatrix2);
+
 struct SparseMatrix init_empty_sparse_matrix(size_t m, size_t n, int capacity);
 void print_sparse_matrix(const struct SparseMatrix sparseMatrix);
 void set_sparse_matrix_element(struct SparseMatrix* sparseMatrix, int element_row, int element_column, int value);
 int get_sparse_matrix_element(struct SparseMatrix sparseMatrix, int element_row, int element_column);
+struct SparseMatrix add_sparse_matrices(struct SparseMatrix sparseMatrix1, struct SparseMatrix sparseMatrix2);
+struct SparseMatrix sub_sparse_matrices(struct SparseMatrix sparseMatrix1, struct SparseMatrix sparseMatrix2);
 
 #endif
