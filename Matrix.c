@@ -129,6 +129,23 @@ struct Matrix scalar_product(struct Matrix matrix, int scalar){
 	return resultMatrix;
 }
 
+struct Matrix multiply_matrices(struct Matrix matrix1, struct Matrix matrix2){
+	if(matrix1.n != matrix2.m) perror("Matrix dimension don't match for multiplication");
+	struct Matrix resultMatrix = init_empty_matrix(matrix1.m, matrix2.n);
+	int result = 0, element1 = 0, element2 = 0;
+	for(int i = 0; i < matrix1.m; i++){
+		for(int j = 0; j < matrix2.n; j++){
+			result = 0;
+			for(int k = 0; k < matrix1.n; k++){
+				element1 = get_element(matrix1, i, k);
+				element2 = get_element(matrix2, k, j);
+				result += element1 * element2;
+			}
+			set_element(&resultMatrix, i, j, result);
+		}
+	}
+	return resultMatrix;
+}
 
 // int main(int argc, char *argv[]) {
 // 	int double_array[9] = {1,2,3,4,5,6,7,8,9};
@@ -137,6 +154,6 @@ struct Matrix scalar_product(struct Matrix matrix, int scalar){
 // 	struct Matrix matrix2 = init_matrix(3, 3, (int*)double_array_2);
 // 	print_matrix(matrix1);
 //	print_matrix(matrix2);
-//	print_matrix(scalar_product(matrix1, 5));
+//	print_matrix(multiply_matrices(matrix1, matrix2));
 //
 // }

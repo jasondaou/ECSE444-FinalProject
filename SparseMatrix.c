@@ -140,6 +140,24 @@ struct SparseMatrix scalar_product_sparse_matrix(struct SparseMatrix sparseMatri
 	return resultMatrix;
 }
 
+struct SparseMatrix multiply_sparse_matrices(struct SparseMatrix sparseMatrix1, struct SparseMatrix sparseMatrix2){
+	int biggest_capacity = sparseMatrix1.capacity > sparseMatrix2.capacity ? sparseMatrix1.capacity : sparseMatrix2.capacity;
+	if(sparseMatrix1.n != sparseMatrix2.m) perror("Matrix dimension don't match for multiplication");
+	struct SparseMatrix resultMatrix = init_empty_sparse_matrix(sparseMatrix1.m, sparseMatrix2.n, biggest_capacity);
+	int result = 0, element1 = 0, element2 = 0;
+	for(int i = 0; i < sparseMatrix1.m; i++){
+		for(int j = 0; j < sparseMatrix2.n; j++){
+			result = 0;
+			for(int k = 0; k < sparseMatrix1.n; k++){
+				element1 = get_sparse_matrix_element(sparseMatrix1, i, k);
+				element2 = get_sparse_matrix_element(sparseMatrix2, k, j);
+				result += element1 * element2;
+			}
+			set_sparse_matrix_element(&resultMatrix, i, j, result);
+		}
+	}
+	return resultMatrix;
+}
 
 
 int main(int argc, char *argv[]) {
@@ -163,7 +181,7 @@ int main(int argc, char *argv[]) {
 	set_sparse_matrix_element(&test2, 2, 2, 5);
 	print_sparse_matrix(test2);
 
-	print_sparse_matrix(scalar_product_sparse_matrix(test, 2));
+	print_sparse_matrix(multiply_sparse_matrices(test, test2));
 
 
 	return 0;

@@ -23,6 +23,7 @@ int get_sparse_matrix_element(struct SparseMatrix sparseMatrix, int element_row,
 struct SparseMatrix add_sparse_matrices(struct SparseMatrix sparseMatrix1, struct SparseMatrix sparseMatrix2);
 struct SparseMatrix sub_sparse_matrices(struct SparseMatrix sparseMatrix1, struct SparseMatrix sparseMatrix2);
 struct SparseMatrix scalar_product_sparse_matrix(struct SparseMatrix sparseMatrix, int scalar);
+struct SparseMatrix multiply_sparse_matrices(struct SparseMatrix sparseMatrix1, struct SparseMatrix sparseMatrix2);
 
 
 #endif

@@ -26,5 +26,5 @@ struct Matrix init_matrix(size_t m, size_t n, int* elements);
 struct Matrix add_matrices(struct Matrix matrix1, struct Matrix matrix2);
 struct Matrix sub_matrices(struct Matrix matrix1, struct Matrix matrix2);
 struct Matrix scalar_product(struct Matrix matrix, int scalar);
-
+struct Matrix multiply_matrices(struct Matrix matrix1, struct Matrix matrix2);
 #endif
