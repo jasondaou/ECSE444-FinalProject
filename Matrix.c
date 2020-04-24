@@ -116,6 +116,19 @@ struct Matrix sub_matrices(struct Matrix matrix1, struct Matrix matrix2){
 	return result_matrix;
 }
 
+struct Matrix scalar_product(struct Matrix matrix, int scalar){
+	struct Matrix resultMatrix = init_empty_matrix(matrix.m, matrix.n);
+	int value = 0;
+	for(int i = 0; i < matrix.m; i++){
+		for(int j = 0; j < matrix.n; j++){
+			value = get_element(matrix, i, j);
+			value *= scalar;
+			set_element(&resultMatrix, i, j, value);
+		}
+	}
+	return resultMatrix;
+}
+
 
 // int main(int argc, char *argv[]) {
 // 	int double_array[9] = {1,2,3,4,5,6,7,8,9};
@@ -124,6 +137,6 @@ struct Matrix sub_matrices(struct Matrix matrix1, struct Matrix matrix2){
 // 	struct Matrix matrix2 = init_matrix(3, 3, (int*)double_array_2);
 // 	print_matrix(matrix1);
 //	print_matrix(matrix2);
-//	print_matrix(add_matrices(matrix1, matrix2));
+//	print_matrix(scalar_product(matrix1, 5));
 //
 // }

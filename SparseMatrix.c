@@ -127,6 +127,21 @@ struct SparseMatrix sub_sparse_matrices(struct SparseMatrix sparseMatrix1, struc
 	return resultMatrix;
 }
 
+struct SparseMatrix scalar_product_sparse_matrix(struct SparseMatrix sparseMatrix, int scalar){
+	struct SparseMatrix resultMatrix = init_empty_sparse_matrix(sparseMatrix.m, sparseMatrix.n, sparseMatrix.capacity);
+	int value = 0;
+	for(int i = 0; i < sparseMatrix.m; i++){
+		for(int j = 0; j < sparseMatrix.n; j++){
+			value = get_sparse_matrix_element(sparseMatrix, i, j);
+			value *= scalar;
+			set_sparse_matrix_element(&resultMatrix, i, j, value);
+		}
+	}
+	return resultMatrix;
+}
+
+
+
 int main(int argc, char *argv[]) {
 	struct SparseMatrix test = init_empty_sparse_matrix(3, 3, 1);
 	
@@ -148,7 +163,7 @@ int main(int argc, char *argv[]) {
 	set_sparse_matrix_element(&test2, 2, 2, 5);
 	print_sparse_matrix(test2);
 
-	print_sparse_matrix(sub_sparse_matrices(test, test2));
+	print_sparse_matrix(scalar_product_sparse_matrix(test, 2));
 
 
 	return 0;
