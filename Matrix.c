@@ -148,7 +148,7 @@ struct Matrix multiply_matrices(struct Matrix matrix1, struct Matrix matrix2){
 }
 
 // int main(int argc, char *argv[]) {
-// 	int double_array[9] = {1,2,3,4,5,6,7,8,9};
+// 	int array[9] = {1,2,3,4,5,6,7,8,9};
 // 	struct Matrix matrix1 = init_matrix(3, 3, (int*)double_array);
 //	int double_array_2[9] = {9,8,7,6,5,4,3,2,1};
 // 	struct Matrix matrix2 = init_matrix(3, 3, (int*)double_array_2);

@@ -15,6 +15,18 @@ struct SparseMatrix init_empty_sparse_matrix(size_t m, size_t n, int capacity){
 	return sparseMatrix;
 }
 
+struct SparseMatrix init_sparse_matrix(size_t m, size_t n, int capacity, int* elements){
+	struct SparseMatrix sparseMatrix = init_empty_sparse_matrix(m, n, capacity);
+	for(int i = 0; i < m; i++){
+		for(int j = 0; j < n; j++){
+			if(elements[i*n+j] != 0){
+				set_sparse_matrix_element(&sparseMatrix, i, j, elements[i*n+j]);
+			}
+		}
+	}
+	return sparseMatrix;
+}
+
 struct Matrix sparse_to_dense_matrix(const struct SparseMatrix sparseMatrix){
 	int* matrixAsArray = malloc(sparseMatrix.m * sparseMatrix.n*sizeof(int));
 	memset(matrixAsArray, 0, sparseMatrix.m * sparseMatrix.n * sizeof(int));
@@ -182,6 +194,8 @@ int main(int argc, char *argv[]) {
 	print_sparse_matrix(test2);
 
 	print_sparse_matrix(multiply_sparse_matrices(test, test2));
+	int elements[9] = {1,2,3,0,0,0,0,0,0};
+	print_sparse_matrix(init_sparse_matrix(3,3,3,(int*)elements));
 
 
 	return 0;
