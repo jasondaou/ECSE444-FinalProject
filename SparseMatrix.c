@@ -15,6 +15,18 @@ struct SparseMatrix init_empty_sparse_matrix(size_t m, size_t n, int capacity){
 	return sparseMatrix;
 }
 
+struct SparseMatrix init_sparse_matrix(size_t m, size_t n, int capacity, int* elements){
+	struct SparseMatrix sparseMatrix = init_empty_sparse_matrix(m, n, capacity);
+	for(int i = 0; i < m; i++){
+		for(int j = 0; j < n; j++){
+			if(elements[i*n+j] != 0){
+				set_sparse_matrix_element(&sparseMatrix, i, j, elements[i*n+j]);
+			}
+		}
+	}
+	return sparseMatrix;
+}
+
 struct Matrix sparse_to_dense_matrix(const struct SparseMatrix sparseMatrix){
 	int* matrixAsArray = malloc(sparseMatrix.m * sparseMatrix.n*sizeof(int));
 	memset(matrixAsArray, 0, sparseMatrix.m * sparseMatrix.n * sizeof(int));
@@ -91,32 +103,100 @@ int get_sparse_matrix_element(struct SparseMatrix sparseMatrix, int element_row,
 	return 0;
 }
 
+void check_sparse_matrix_same_size(struct SparseMatrix sparseMatrix1, struct SparseMatrix sparseMatrix2){
+		if(sparseMatrix1.m != sparseMatrix2.m || sparseMatrix1.n != sparseMatrix2.n) perror("Matrices should have the same size to add");
+}
 
+struct SparseMatrix add_sparse_matrices(struct SparseMatrix sparseMatrix1, struct SparseMatrix sparseMatrix2){
+	check_sparse_matrix_same_size(sparseMatrix1, sparseMatrix2);
+	int biggest_capacity = sparseMatrix1.capacity > sparseMatrix2.capacity ? sparseMatrix1.capacity : sparseMatrix2.capacity;
+	struct SparseMatrix resultMatrix = init_empty_sparse_matrix(sparseMatrix1.m, sparseMatrix1.n, biggest_capacity);
+	int result = 0, element1 = 0, element2 = 0;
+	for(int i = 0; i < sparseMatrix1.m; i++){
+		for(int j = 0; j < sparseMatrix1.n; j++){
+			int element1 = get_sparse_matrix_element(sparseMatrix1, i, j);
+			int element2 = get_sparse_matrix_element(sparseMatrix2, i, j);
+			result = element1 + element2;
+			set_sparse_matrix_element(&resultMatrix, i, j, result);
+		}
+	}
+	return resultMatrix;
+}
+
+struct SparseMatrix sub_sparse_matrices(struct SparseMatrix sparseMatrix1, struct SparseMatrix sparseMatrix2){
+	check_sparse_matrix_same_size(sparseMatrix1, sparseMatrix2);
+	int biggest_capacity = sparseMatrix1.capacity > sparseMatrix2.capacity ? sparseMatrix1.capacity : sparseMatrix2.capacity;
+	struct SparseMatrix resultMatrix = init_empty_sparse_matrix(sparseMatrix1.m, sparseMatrix1.n, biggest_capacity);
+	int result = 0, element1 = 0, element2 = 0;
+	for(int i = 0; i < sparseMatrix1.m; i++){
+		for(int j = 0; j < sparseMatrix1.n; j++){
+			int element1 = get_sparse_matrix_element(sparseMatrix1, i, j);
+			int element2 = get_sparse_matrix_element(sparseMatrix2, i, j);
+			result = element1 - element2;
+			set_sparse_matrix_element(&resultMatrix, i, j, result);
+		}
+	}
+	return resultMatrix;
+}
+
+struct SparseMatrix scalar_product_sparse_matrix(struct SparseMatrix sparseMatrix, int scalar){
+	struct SparseMatrix resultMatrix = init_empty_sparse_matrix(sparseMatrix.m, sparseMatrix.n, sparseMatrix.capacity);
+	int value = 0;
+	for(int i = 0; i < sparseMatrix.m; i++){
+		for(int j = 0; j < sparseMatrix.n; j++){
+			value = get_sparse_matrix_element(sparseMatrix, i, j);
+			value *= scalar;
+			set_sparse_matrix_element(&resultMatrix, i, j, value);
+		}
+	}
+	return resultMatrix;
+}
+
+struct SparseMatrix multiply_sparse_matrices(struct SparseMatrix sparseMatrix1, struct SparseMatrix sparseMatrix2){
+	int biggest_capacity = sparseMatrix1.capacity > sparseMatrix2.capacity ? sparseMatrix1.capacity : sparseMatrix2.capacity;
+	if(sparseMatrix1.n != sparseMatrix2.m) perror("Matrix dimension don't match for multiplication");
+	struct SparseMatrix resultMatrix = init_empty_sparse_matrix(sparseMatrix1.m, sparseMatrix2.n, biggest_capacity);
+	int result = 0, element1 = 0, element2 = 0;
+	for(int i = 0; i < sparseMatrix1.m; i++){
+		for(int j = 0; j < sparseMatrix2.n; j++){
+			result = 0;
+			for(int k = 0; k < sparseMatrix1.n; k++){
+				element1 = get_sparse_matrix_element(sparseMatrix1, i, k);
+				element2 = get_sparse_matrix_element(sparseMatrix2, k, j);
+				result += element1 * element2;
+			}
+			set_sparse_matrix_element(&resultMatrix, i, j, result);
+		}
+	}
+	return resultMatrix;
+}
 
 
 int main(int argc, char *argv[]) {
 	struct SparseMatrix test = init_empty_sparse_matrix(3, 3, 1);
-	print_sparse_matrix(test);
 	
-	set_sparse_matrix_element(&test, 0, 0, 1);
-	print_sparse_matrix(test);
-	
+	set_sparse_matrix_element(&test, 0, 0, -1);
 	set_sparse_matrix_element(&test, 1, 1, 2);
-	print_sparse_matrix(test);
-	
 	set_sparse_matrix_element(&test, 1, 1, 3);
-	print_sparse_matrix(test);
-	
 	set_sparse_matrix_element(&test, 1, 2, 3);
-	print_sparse_matrix(test);
-	
 	set_sparse_matrix_element(&test, 2, 1, 3);
-	print_sparse_matrix(test);
-	
 	set_sparse_matrix_element(&test, 2, 2, 5);
 	print_sparse_matrix(test);
 	
-	printf("%d", get_sparse_matrix_element(test, 2, 1));
+	struct SparseMatrix test2 = init_empty_sparse_matrix(3, 3, 1);
+		
+	set_sparse_matrix_element(&test2, 0, 0, 1);
+	set_sparse_matrix_element(&test2, 1, 1, 2);
+	set_sparse_matrix_element(&test2, 1, 1, 3);
+	set_sparse_matrix_element(&test2, 1, 2, 3);
+	set_sparse_matrix_element(&test2, 2, 1, 3);
+	set_sparse_matrix_element(&test2, 2, 2, 5);
+	print_sparse_matrix(test2);
+
+	print_sparse_matrix(multiply_sparse_matrices(test, test2));
+	int elements[9] = {1,2,3,0,0,0,0,0,0};
+	print_sparse_matrix(init_sparse_matrix(3,3,3,(int*)elements));
+
 
 	return 0;
 	
