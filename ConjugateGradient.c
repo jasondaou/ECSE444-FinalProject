@@ -94,6 +94,7 @@ int main(int argc, char **argv) {
 		
 		
 		// Setup variables
+		double* holderVector = malloc(order * sizeof(double));
 		int count = 0;
 		double alpha;
 		double beta;
@@ -105,25 +106,25 @@ int main(int argc, char **argv) {
 		double* resVector = malloc(order * sizeof(double));
 		double* resVector_prev = malloc(order * sizeof(double));
 		double* resVector_prev_prev = malloc(order * sizeof(double));
-		double* holderVector = malloc(order * sizeof(double));
 		
 		// For each row:
 		for (int i = 0; i < order; i++) {
-			x[i] = 0;
 			resVector[i] = rhs[i];
 			resVector_prev[i] = rhs[i];
 			resVector_prev_prev[i] = rhs[i];
+			x[i] = 0;
 		}
 		
 		// Start timer
 		TIMER(time_start);
 		
-		while ((count < max_iterations) && (dotProd(resVector, resVector, order) > tolerance)) {
+
+		while ((dotProd(resVector, resVector, order) > tolerance) && (count < max_iterations)) {
+			count++;
 			assignVector(resVector_prev_prev, resVector_prev, order);
 			assignVector(resVector_prev, resVector, order);
 			assignVector(p_prev, p, order);
 			assignVector(x_prev, x, order);
-			count++;
 			if (count == 1) {
 				// (Direction vector) P_1 = R_0 (Residual vector)
 				memcpy(p, resVector_prev, (order * sizeof(double)));
@@ -132,11 +133,10 @@ int main(int argc, char **argv) {
 			} else {
 				// b = [R_1 * R_1] / [R_0 * R_0]  
 				beta = dotProd(resVector_prev, resVector_prev, order)/dotProd(resVector_prev_prev, resVector_prev_prev, order);
-				
-			
 				// P_1 = R_1 + [beta_0 * P_0] */
 				holderVector = scalarProd(holderVector, p_prev, beta, order);
 				p = vectorAdd(p, resVector, holderVector, order);
+				
 			}
 			// S_1 = (A * P_1) 
 			s = crossProd(s, matrix, p, order);
