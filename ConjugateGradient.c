@@ -116,7 +116,7 @@ int main(int argc, char **argv) {
 		}
 		
 		// Start timer
-		TIMER(time_start);
+		GET_TIME(time_start);
 		
 
 		while ((dotProd(resVector, resVector, order) > tolerance) && (count < max_iterations)) {
@@ -156,7 +156,7 @@ int main(int argc, char **argv) {
 			
 		}
 		
-		TIMER(time_finish);
+		GET_TIME(time_finish);
 		time_elapsed = time_finish - time_start;
 		
 		printf("Time taken (seconds): %lf\n", time_elapsed);
