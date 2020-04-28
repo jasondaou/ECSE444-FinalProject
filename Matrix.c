@@ -146,7 +146,7 @@ struct Matrix sub_matrices(struct Matrix matrix1, struct Matrix matrix2){
 
 struct Matrix scalar_product(struct Matrix matrix, float scalar){
 	struct Matrix resultMatrix = init_empty_matrix(matrix.m, matrix.n);
-	int value = 0;
+	float value = 0;
 	for(int i = 0; i < matrix.m; i++){
 		for(int j = 0; j < matrix.n; j++){
 			value = get_element(matrix, i, j);

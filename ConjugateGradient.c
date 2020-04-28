@@ -131,6 +131,16 @@ int conjugate_gradient(struct Matrix matrixA, struct Matrix matrixB, int order, 
 	// Get residual vector
 	// R_k = B - (A * X_k) 
 	resVector = sub_matrices(matrixB, crossProd(matrixA, x));
+
+    deinit_matrix(holderVector);
+    deinit_matrix(x);
+    deinit_matrix(x_prev);
+    deinit_matrix(s);
+    deinit_matrix(p);
+    deinit_matrix(p_prev);
+    deinit_matrix(resVector);
+    deinit_matrix(resVector_prev);
+    deinit_matrix(resVector_prev_prev);
 		
   return 0;
 }
