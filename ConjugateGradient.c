@@ -117,13 +117,13 @@ int conjugate_gradient(struct Matrix matrixA, struct Matrix matrixB, int order, 
 	GET_TIME(time_finish);
 	time_elapsed = time_finish - time_start;
 	
-	printf("Time taken (seconds) CG: %lf\n", time_elapsed);
+	printf("Time taken (seconds) CG: %.10lf\n", time_elapsed);
 	printf("No. of iterations taken: %d \n", count);
 	
-	printf("Answer CG: \n");
-	for (int i = 0; i < (order); i++) {
-		printf("%f\n", get_element(x, i, 0));
-	}	  	
+	//printf("Answer CG: \n");
+	//for (int i = 0; i < (order); i++) {
+	//	printf("%f\n", get_element(x, i, 0));
+	//}	  	
 	
 	
 	// Get residual vector

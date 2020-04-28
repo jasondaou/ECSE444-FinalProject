@@ -1,0 +1,148 @@
+MATRIX SIZE 
+Matrix size: 2
+Time taken (seconds) Cholesky: 0.0000028610
+Time taken (seconds) CG: 0.0000059605
+No. of iterations taken: 2 
+
+Matrix size: 12
+Time taken (seconds) Cholesky: 0.0000340939
+Time taken (seconds) CG: 0.0005087852
+No. of iterations taken: 33 
+
+Matrix size: 22
+Time taken (seconds) Cholesky: 0.0001409054
+Time taken (seconds) CG: 0.0039930344
+No. of iterations taken: 99 
+
+Matrix size: 32
+Time taken (seconds) Cholesky: 0.0003800392
+Time taken (seconds) CG: 0.0397088528
+No. of iterations taken: 199 
+
+Matrix size: 42
+Time taken (seconds) Cholesky: 0.0008649826
+Time taken (seconds) CG: 0.1038641930
+No. of iterations taken: 325 
+
+Matrix size: 52
+Time taken (seconds) Cholesky: 0.0017039776
+Time taken (seconds) CG: 0.0810761452
+No. of iterations taken: 569 
+
+Matrix size: 62
+Time taken (seconds) Cholesky: 0.0024800301
+Time taken (seconds) CG: 0.1451890469
+No. of iterations taken: 783 
+
+Matrix size: 72
+Time taken (seconds) Cholesky: 0.0039939880
+Time taken (seconds) CG: 0.2349150181
+No. of iterations taken: 1000 
+
+Matrix size: 82
+Time taken (seconds) Cholesky: 0.0055470467
+Time taken (seconds) CG: 0.2987768650
+No. of iterations taken: 1000 
+
+Matrix size: 92
+Time taken (seconds) Cholesky: 0.0077061653
+Time taken (seconds) CG: 0.3654389381
+No. of iterations taken: 1000 
+
+
+ ******************* 
+MATRIX SPARSITY
+Sparsity ratio: 0.000000
+Time taken (seconds) Cholesky: 0.0000050068
+Time taken (seconds) CG: 0.0000569820
+No. of iterations taken: 7 
+
+Sparsity ratio: 0.100000
+Time taken (seconds) Cholesky: 0.0000040531
+Time taken (seconds) CG: 0.0000469685
+No. of iterations taken: 10 
+
+Sparsity ratio: 0.200000
+Time taken (seconds) Cholesky: 0.0000040531
+Time taken (seconds) CG: 0.0000460148
+No. of iterations taken: 10 
+
+Sparsity ratio: 0.300000
+Time taken (seconds) Cholesky: 0.0000040531
+Time taken (seconds) CG: 0.0000500679
+No. of iterations taken: 11 
+
+Sparsity ratio: 0.400000
+Time taken (seconds) Cholesky: 0.0000040531
+Time taken (seconds) CG: 0.0000309944
+No. of iterations taken: 7 
+
+Sparsity ratio: 0.500000
+Time taken (seconds) Cholesky: 0.0000040531
+Time taken (seconds) CG: 0.0000379086
+No. of iterations taken: 8 
+
+Sparsity ratio: 0.600000
+Time taken (seconds) Cholesky: 0.0000040531
+Time taken (seconds) CG: 0.0000319481
+No. of iterations taken: 7 
+
+Sparsity ratio: 0.700000
+Time taken (seconds) Cholesky: 0.0000030994
+Time taken (seconds) CG: 0.0000669956
+No. of iterations taken: 6 
+
+Sparsity ratio: 0.800000
+Time taken (seconds) Cholesky: 0.0000040531
+Time taken (seconds) CG: 0.0000228882
+No. of iterations taken: 5 
+
+Sparsity ratio: 0.900000
+Time taken (seconds) Cholesky: 0.0000040531
+Time taken (seconds) CG: 0.0000278950
+No. of iterations taken: 6 
+
+Sparsity ratio: 1.000000
+Time taken (seconds) Cholesky: 0.0000040531
+Time taken (seconds) CG: 0.0000038147
+No. of iterations taken: 1 
+
+
+ ******************* 
+CG TOLERANCE
+CG tolerance: 0.0000001000
+Time taken (seconds) CG: 0.0000450611
+No. of iterations taken: 10 
+
+CG tolerance: 0.0000002000
+Time taken (seconds) CG: 0.0000360012
+No. of iterations taken: 8 
+
+CG tolerance: 0.0000003000
+Time taken (seconds) CG: 0.0000319481
+No. of iterations taken: 7 
+
+CG tolerance: 0.0000004000
+Time taken (seconds) CG: 0.0000231266
+No. of iterations taken: 5 
+
+CG tolerance: 0.0000005000
+Time taken (seconds) CG: 0.0000181198
+No. of iterations taken: 4 
+
+CG tolerance: 0.0000006000
+Time taken (seconds) CG: 0.0000419617
+No. of iterations taken: 9 
+
+CG tolerance: 0.0000007000
+Time taken (seconds) CG: 0.0000500679
+No. of iterations taken: 11 
+
+CG tolerance: 0.0000008000
+Time taken (seconds) CG: 0.0000331402
+No. of iterations taken: 7 
+
+CG tolerance: 0.0000009000
+Time taken (seconds) CG: 0.0000228882
+No. of iterations taken: 5 
+
