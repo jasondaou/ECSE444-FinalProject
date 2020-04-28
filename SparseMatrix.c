@@ -172,32 +172,32 @@ struct SparseMatrix multiply_sparse_matrices(struct SparseMatrix sparseMatrix1, 
 }
 
 
-int main(int argc, char *argv[]) {
-	struct SparseMatrix test = init_empty_sparse_matrix(3, 3, 1);
+// int main(int argc, char *argv[]) {
+// 	struct SparseMatrix test = init_empty_sparse_matrix(3, 3, 1);
 	
-	set_sparse_matrix_element(&test, 0, 0, -1);
-	set_sparse_matrix_element(&test, 1, 1, 2);
-	set_sparse_matrix_element(&test, 1, 1, 3);
-	set_sparse_matrix_element(&test, 1, 2, 3);
-	set_sparse_matrix_element(&test, 2, 1, 3);
-	set_sparse_matrix_element(&test, 2, 2, 5);
-	print_sparse_matrix(test);
+// 	set_sparse_matrix_element(&test, 0, 0, -1);
+// 	set_sparse_matrix_element(&test, 1, 1, 2);
+// 	set_sparse_matrix_element(&test, 1, 1, 3);
+// 	set_sparse_matrix_element(&test, 1, 2, 3);
+// 	set_sparse_matrix_element(&test, 2, 1, 3);
+// 	set_sparse_matrix_element(&test, 2, 2, 5);
+// 	print_sparse_matrix(test);
 	
-	struct SparseMatrix test2 = init_empty_sparse_matrix(3, 3, 1);
+// 	struct SparseMatrix test2 = init_empty_sparse_matrix(3, 3, 1);
 		
-	set_sparse_matrix_element(&test2, 0, 0, 1);
-	set_sparse_matrix_element(&test2, 1, 1, 2);
-	set_sparse_matrix_element(&test2, 1, 1, 3);
-	set_sparse_matrix_element(&test2, 1, 2, 3);
-	set_sparse_matrix_element(&test2, 2, 1, 3);
-	set_sparse_matrix_element(&test2, 2, 2, 5);
-	print_sparse_matrix(test2);
+// 	set_sparse_matrix_element(&test2, 0, 0, 1);
+// 	set_sparse_matrix_element(&test2, 1, 1, 2);
+// 	set_sparse_matrix_element(&test2, 1, 1, 3);
+// 	set_sparse_matrix_element(&test2, 1, 2, 3);
+// 	set_sparse_matrix_element(&test2, 2, 1, 3);
+// 	set_sparse_matrix_element(&test2, 2, 2, 5);
+// 	print_sparse_matrix(test2);
 
-	print_sparse_matrix(multiply_sparse_matrices(test, test2));
-	int elements[9] = {1,2,3,0,0,0,0,0,0};
-	print_sparse_matrix(init_sparse_matrix(3,3,3,(int*)elements));
+// 	print_sparse_matrix(multiply_sparse_matrices(test, test2));
+// 	int elements[9] = {1,2,3,0,0,0,0,0,0};
+// 	print_sparse_matrix(init_sparse_matrix(3,3,3,(int*)elements));
 
 
-	return 0;
+// 	return 0;
 	
-}
+// }

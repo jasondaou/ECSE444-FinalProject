@@ -46,9 +46,6 @@ struct Matrix cholesky_solver(struct Matrix A, struct Matrix b) {
         }
     }
 
-    print_matrix(A_clone);
-    print_matrix(b_clone);
-
     // By here, L has been computed in place of A, and y in place of b
     // Initialize solution matrix, x
     struct Matrix x = init_empty_matrix(n, 1);
@@ -127,19 +124,17 @@ struct Matrix random_x(int n) {
     return x;
 }
 
-int main() {
-
-
-    struct Matrix spd = create_spd_matrix(10, 0.5);
-    printf("spd \n");
-    print_matrix(spd);
-    struct Matrix x = random_x(10);
-    printf("Actual x \n");
-    print_matrix(x);
-    struct Matrix b = multiply_matrices(spd, x);
-    printf("b \n");
-    print_matrix(b);
-    struct Matrix choleski_x = cholesky_solver(spd, b);
-    printf("choleski x \n");
-    print_matrix(choleski_x);
-}
+// int main() {
+//     struct Matrix spd = create_spd_matrix(10, 0.5);
+//     printf("spd \n");
+//     print_matrix(spd);
+//     struct Matrix x = random_x(10);
+//     printf("Actual x \n");
+//     print_matrix(x);
+//     struct Matrix b = multiply_matrices(spd, x);
+//     printf("b \n");
+//     print_matrix(b);
+//     struct Matrix choleski_x = cholesky_solver(spd, b);
+//     printf("choleski x \n");
+//     print_matrix(choleski_x);
+// }

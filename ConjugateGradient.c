@@ -34,8 +34,6 @@ struct Matrix crossProd(struct Matrix matrix, struct Matrix vector) {
 
 
 void assignVector(struct Matrix a, struct Matrix b) {
-	struct Matrix temp = a;
-
 	for (int i = 0; i < a.m; i++) {
 		for (int j = 0; j < a.m; j++) {
 			set_element(&a, i, j, get_element(b, i, j));
@@ -49,12 +47,6 @@ void assignVector(struct Matrix a, struct Matrix b) {
 
 int conjugate_gradient(struct Matrix matrixA, struct Matrix matrixB, int order, float tolerance, int max_iterations) {
 	double time_start, time_finish, time_elapsed;
-
-
-	// Print our matrix
-	// print_matrix(matrixA);
-	// print_matrix(matrixB);
-
 
 	// Setup variables
 	int count = 0;
@@ -94,11 +86,14 @@ int conjugate_gradient(struct Matrix matrixA, struct Matrix matrixB, int order, 
 			// b = [R_1 * R_1] / [R_0 * R_0]  
 			beta = dotProd(resVector_prev, resVector_prev)/dotProd(resVector_prev_prev, resVector_prev_prev);
 			// P_1 = R_1 + [beta_0 * P_0]
+			deinit_matrix(holderVector);
 			holderVector = scalar_product(p_prev, beta);
+			deinit_matrix(p);
 			p = add_matrices(resVector, holderVector);
 			
 		}
 		// S_1 = (A * P_1) 
+		deinit_matrix(s);
 		s = crossProd(matrixA, p);
 		
 		// alpha_1 = [R_1 * R_1] / [P_1 * S_1]
@@ -107,11 +102,15 @@ int conjugate_gradient(struct Matrix matrixA, struct Matrix matrixB, int order, 
 		alpha = d1/d2;
 
 		// X_2 = X_1 + (alpha_1 * P_1)
+		deinit_matrix(holderVector);
 		holderVector = scalar_product(p, alpha);
+		deinit_matrix(x);
 		x = add_matrices(x_prev, holderVector);
 		
 		// R_(k+1) = R_k - (alpha_k * S_k)
+		deinit_matrix(holderVector);
 		holderVector = scalar_product(s, alpha);
+		deinit_matrix(resVector);
 		resVector = sub_matrices(resVector_prev, holderVector);
 		
 	}
@@ -119,10 +118,10 @@ int conjugate_gradient(struct Matrix matrixA, struct Matrix matrixB, int order, 
 	GET_TIME(time_finish);
 	time_elapsed = time_finish - time_start;
 	
-	printf("Time taken (seconds): %lf\n", time_elapsed);
+	printf("Time taken (seconds) CG: %lf\n", time_elapsed);
 	printf("No. of iterations taken: %d \n", count);
 	
-	printf("Answer: \n");
+	printf("Answer CG: \n");
 	for (int i = 0; i < (order); i++) {
 		printf("%f\n", get_element(x, i, 0));
 	}	  	
@@ -146,12 +145,12 @@ int conjugate_gradient(struct Matrix matrixA, struct Matrix matrixB, int order, 
 }
 
 
-int main(int argc, char *argv[]) {
-	float inputA[] = {4, 1, 1, 3};
-	float inputB[] = {1, 2};
+// int main(int argc, char *argv[]) {
+// 	float inputA[] = {4, 1, 1, 3};
+// 	float inputB[] = {1, 2};
 
-	struct Matrix matrixA = init_matrix(2, 2, inputA);
-	struct Matrix matrixB = init_matrix(2, 1, inputB);
+// 	struct Matrix matrixA = init_matrix(2, 2, inputA);
+// 	struct Matrix matrixB = init_matrix(2, 1, inputB);
 
-	int ret = conjugate_gradient(matrixA, matrixB, 2, 0.001, 100);
-}
+// 	int ret = conjugate_gradient(matrixA, matrixB, 2, 0.001, 100);
+// }
