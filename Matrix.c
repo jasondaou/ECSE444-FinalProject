@@ -134,7 +134,7 @@ struct Matrix sub_matrices(struct Matrix matrix1, struct Matrix matrix2){
 	struct Matrix result_matrix = init_empty_matrix(matrix1.m, matrix1.n);
 	float result = 0, element1 = 0, element2 = 0;
 	for(int i = 0; i < matrix1.m; i++){
-		for(int j = 0; j < matrix2.m; j++){
+		for(int j = 0; j < matrix1.n; j++){
 			element1 = get_element(matrix1, i, j);
 			element2 = get_element(matrix2, i, j);
 			result = element1 - element2;

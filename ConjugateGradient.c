@@ -5,6 +5,7 @@
 #include "timer.h"
 #include "Matrix.h"
 #include "SparseMatrix.h"
+#include "cholesky.h"
 
 float dotProd(struct Matrix a, struct Matrix b) {
 	if (a.n != 1 || b.n != 1)
@@ -35,9 +36,7 @@ struct Matrix crossProd(struct Matrix matrix, struct Matrix vector) {
 
 void assignVector(struct Matrix a, struct Matrix b) {
 	for (int i = 0; i < a.m; i++) {
-		for (int j = 0; j < a.m; j++) {
-			set_element(&a, i, j, get_element(b, i, j));
-		}
+	    set_element(&a, i, 0, get_element(b, i, 0));
 	}
 }
 
@@ -144,13 +143,15 @@ int conjugate_gradient(struct Matrix matrixA, struct Matrix matrixB, int order, 
   return 0;
 }
 
-
-// int main(int argc, char *argv[]) {
+/*
+ int main(int argc, char *argv[]) {
 // 	float inputA[] = {4, 1, 1, 3};
 // 	float inputB[] = {1, 2};
+	struct Matrix matrixA = create_spd_matrix(10, 0.3);
+	struct Matrix x_actual = random_x(10);
+	print_matrix(x_actual);
+ 	struct Matrix matrixB = multiply_matrices(matrixA, x_actual);
 
-// 	struct Matrix matrixA = init_matrix(2, 2, inputA);
-// 	struct Matrix matrixB = init_matrix(2, 1, inputB);
-
-// 	int ret = conjugate_gradient(matrixA, matrixB, 2, 0.001, 100);
-// }
+ 	int ret = conjugate_gradient(matrixA, matrixB, 10, 0.001, 100);
+}
+*/
